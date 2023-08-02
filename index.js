@@ -1,5 +1,5 @@
-const app = require('./app');
-const { syncAndSeed } = require('./db');
+const app = require('./server/app');
+const { syncAndSeed } = require('./server/db');
 
 const init = async()=> {
   try {
