@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { attemptLogin } from '../../src/store';
+import { attemptLogin } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Login = ()=> {
