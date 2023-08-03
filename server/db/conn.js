@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
+require("dotenv").config();
 const config = {
 };
+
 
 if(process.env.QUIET){
   config.logging = false;

@@ -3,22 +3,25 @@ const User = require('./User');
 const Product = require('./Product');
 const Order = require('./Order');
 const LineItem  = require('./LineItem');
+const Review = require("./Review");
 
 Order.belongsTo(User);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
+Product.hasMany(Review);
+User.hasMany(Review);
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   const [moe, lucy, larry, foo, bar, bazz, ethyl] = await Promise.all([
-    User.create({ username: 'moe', password: '123' }),
-    User.create({ username: 'lucy', password: '123' }),
-    User.create({ username: 'larry', password: '123' }),
+    User.create({ username: 'moe', password: '123' , email: "moe@email.com"}),
+    User.create({ username: 'lucy', password: '123' , email: "lucy@email.com"}),
+    User.create({ username: 'larry', password: '123' , email: "larry@email.com"}),
     Product.create({ name: 'foo' }),
     Product.create({ name: 'bar' }),
     Product.create({ name: 'bazz' }),
-    User.create({ username: 'ethyl', password: '123' }),
+    User.create({ username: 'ethyl', password: '123' , email: "ethyl@email.com"}),
   ]);
 
   const cart = await ethyl.getCart();
@@ -42,5 +45,6 @@ const syncAndSeed = async()=> {
 module.exports = {
   syncAndSeed,
   User,
-  Product
+  Product,
+  Review
 };
