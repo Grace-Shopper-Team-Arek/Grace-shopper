@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../src/store';
+import { logout } from '../store';
 import { Link } from 'react-router-dom';
 
 const Cart = ()=> {
