@@ -15,6 +15,11 @@ const Order = conn.define('order', {
   userId: {
     type: UUID,
     allowNull: false
+  },
+  fulfilled: {
+    type: BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 });
 
