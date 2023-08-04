@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom'; 
 import { fetchUserProfileThunk } from '../reducers/fetchUserProfile';
 
 const UserProfile = (props) => {
-    const { fetchUserProfile, userProfile, match } = props;
+    const { id } = useParams(); 
+    console.log(id)
+    const { fetchUserProfile, userProfile } = props;
+    console.log(props)
 
     useEffect(() => {
-        fetchUserProfile(match.params.id);
-    }, [fetchUserProfile, match.params.id]);
+        fetchUserProfile(id); 
+    }, [fetchUserProfile, id]); 
 
     return (
         <div>
@@ -25,9 +29,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUserProfile: (id) => dispatch(fetchUserProfile(id)),
+        fetchUserProfile: (id) => dispatch(fetchUserProfileThunk(id)),
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
-

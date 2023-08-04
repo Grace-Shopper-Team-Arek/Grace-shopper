@@ -42,6 +42,7 @@ const App = ()=> {
             </nav>
             <Routes>
               <Route path='/cart' element={ <Cart /> } />
+              <Route path='/users/:id' element={ <UserProfile /> } />
             </Routes>
           </div>
         )
