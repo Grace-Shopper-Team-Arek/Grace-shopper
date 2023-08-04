@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchUserProfile } from '../reducers/fetchUserProfile';
+import { fetchUserProfileThunk } from '../reducers/fetchUserProfile';
 
-class UserProfile extends Component {
-    constructor(props) {
-        super(props);
-    }
+const UserProfile = (props) => {
+    const { fetchUserProfile, userProfile, match } = props;
 
-    componentDidMount() {
-        this.props.fetchUserProfile(this.props.match.params.id);
-    }
+    useEffect(() => {
+        fetchUserProfile(match.params.id);
+    }, [fetchUserProfile, match.params.id]);
 
-    render() {
-        const { userProfile } = this.props;
-        return (
-            <div>
-                <h1>{userProfile.username}</h1>
-                <h2>{userProfile.email}</h2>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>{userProfile.username}</h1>
+            <h2>{userProfile.email}</h2>
+        </div>
+    );
 }
 
 const mapStateToProps = (state) => {
     return {
-        userProfile: state.userProfile
-    }
+        userProfile: state.userProfile,
+    };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUserProfile: (id) => dispatch(fetchUserProfile(id))
-    }
-}
+        fetchUserProfile: (id) => dispatch(fetchUserProfile(id)),
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+
