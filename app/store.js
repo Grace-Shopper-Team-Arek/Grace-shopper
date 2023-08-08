@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import auth from './reducers/auth';
 import cart from './reducers/cart';
+import userProfile from './reducers/fetchUserProfile';
 
 const reducer = combineReducers({
   auth,
-  cart
+  cart,
+  userProfile,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
