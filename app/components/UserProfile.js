@@ -11,12 +11,12 @@ const UserProfile = (props) => {
 
     useEffect(() => {
         fetchUserProfile(id); 
-    }, [fetchUserProfile, id]); 
+    }, [id]); 
 
     return (
         <div>
-            <h1>{userProfile.username}</h1>
-            <h2>{userProfile.email}</h2>
+            <h1>{userProfile?.username}</h1>
+            <h2>{userProfile?.email}</h2>
         </div>
     );
 }
