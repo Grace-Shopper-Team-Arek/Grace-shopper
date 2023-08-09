@@ -20,7 +20,7 @@ const Products = (props) => {
           <div key={id}>
             <li>{product.name}</li>
             <li>{product.description}</li>
-            <li>{product.imageUrl}</li>
+            <img src={product.imageUrl} />
           </div>
         ))}
       </ul>
