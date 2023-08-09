@@ -6,6 +6,7 @@ import Login from "./Login";
 import Cart from "./Cart";
 import UserProfile from "./UserProfile";
 import Products from "./Products";
+import NavBar from './Navbar';
 
 //actions
 import { fetchUserProfileThunk } from "../reducers/fetchUserProfile";
@@ -29,23 +30,21 @@ const App = () => {
   }, [auth]);
   return (
     <div>
+      <NavBar />
       <h1>Acme Shopping</h1>
       {auth.id ? <Home /> : <Login />}
-      {!!auth.id && (
-        <div>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/cart">Cart</Link>
-            <Link to={`/users/${auth.id}`}>Profile</Link>
-            <Link to={`/products`}>Products</Link>
-          </nav>
-          <Routes>
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/users/:id" element={<UserProfile />} />
-            <Route path="/products" element={<Products />} />
-          </Routes>
-        </div>
-      )}
+      {!!auth.id  && (
+          <div>
+            <main>
+            <Routes>
+              <Route path='/cart' element={ <Cart /> } />
+              <Route path='/users/:id' element={ <UserProfile /> } />
+              <Route path="/products" element={<Products />} />
+            </Routes>
+            </main>
+          </div>
+        )
+      }
     </div>
   );
 };
