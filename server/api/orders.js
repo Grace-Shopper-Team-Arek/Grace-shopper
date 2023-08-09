@@ -42,7 +42,7 @@ app.put("/cart", async (req, res, next) => {
 
 //Build out past orders api endpoints
 
-app.get("/pastorders", async (req, res, next) => {
+app.get("/past", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getPastOrders());
@@ -51,7 +51,7 @@ app.get("/pastorders", async (req, res, next) => {
   }
 });
 
-app.post("/pastorders", async (req, res, next) => {
+app.post("/past", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.archiveOrders(req.body));
