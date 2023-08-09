@@ -15,11 +15,14 @@ app.get("/", async (req, res, next) => {
   }
 });
 
-// POST /products (ability for admin to create new product)
+// POST /products (ability for admin to create new product) - middleware to check on user type
 app.post("/", async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body);
-    res.status(201).send(newProduct);
+    const user = await User.findByToken(req.headers.authorization);
+    if (user.userType === "ADMIN") {
+      const newProduct = await Product.create(req.body);
+      res.status(201).send(newProduct);
+    }
   } catch (ex) {
     res
       .status(500)
