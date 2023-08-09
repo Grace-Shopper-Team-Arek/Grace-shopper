@@ -14,7 +14,19 @@ User.hasMany(Review);
 
 const syncAndSeed = async () => {
   await conn.sync({ force: true });
-  const [moe, lucy, larry, foo, bar, bazz, ethyl] = await Promise.all([
+  const [
+    moe,
+    lucy,
+    larry,
+    foo,
+    bar,
+    bazz,
+    bcard1,
+    bcard2,
+    bcard3,
+    gcard1,
+    ethyl,
+  ] = await Promise.all([
     User.create({ username: "moe", password: "123", email: "moe@email.com" }),
     User.create({ username: "lucy", password: "123", email: "lucy@email.com" }),
     User.create({
