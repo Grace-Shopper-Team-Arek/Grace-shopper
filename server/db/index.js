@@ -80,6 +80,10 @@ const syncAndSeed = async () => {
       foo,
       bar,
       bazz,
+      bcard1,
+      bcard2,
+      bcard3,
+      gcard1,
     },
   };
 };
