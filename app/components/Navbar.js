@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
+
 
 const NavBar = () => {
     return (
@@ -16,6 +15,9 @@ const NavBar = () => {
                     </li>
                     <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to="/Cart">Cart</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to="/Products">Products</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to="/users/${auth.id}">Profile</NavLink>
