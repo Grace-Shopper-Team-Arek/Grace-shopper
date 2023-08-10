@@ -1,4 +1,5 @@
 const conn = require("./conn");
+require("dotenv").config();
 const { STRING, UUID, UUIDV4, ENUM } = conn.Sequelize;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

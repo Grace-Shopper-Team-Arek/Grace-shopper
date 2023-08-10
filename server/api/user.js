@@ -10,4 +10,18 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
+router.put("/:id", async (req, res, next) => {
+    try {
+        // console.log("Made it to the put", req.params);
+        const updatedUser = await User.update(req.body, {
+             where: {id: req.params.id.replace(":", "")}
+             //why does the id include the colon? no clue, but it has to go for this to work
+             //maybe quirk of using UUIDs instead of just integers?
+         });
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Bad request");
+    }
+});
+
 module.exports = router;
