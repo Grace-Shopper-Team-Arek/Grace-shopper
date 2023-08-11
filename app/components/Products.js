@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { allProductsThunk } from "../reducers/products";
 
 const Products = (props) => {
   const { fetchProducts, products } = props;
-  console.log(props);
 
   useEffect(() => {
     fetchProducts();
@@ -17,19 +16,20 @@ const Products = (props) => {
     <div className="container mx-auto mt-4">
       <div className="row">
         <div className="col-md-4">
-          {products.map((product, id) => (
+          {products.map((product) => (
             <div className="card">
-              <img src={product.imageUrl} className="card-img-top" />
-              <div className="card-body">
-                <h5 className="card-title">{product?.name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">
-                  Price: ${product?.price}
-                </h6>
-                <p className="card-text">{product?.description}</p>
-                <button>
-                  <i className="fas fa-link"></i>Add to Cart
-                </button>
-              </div>
+              <Link to={`/products/${product.id}`}>
+                <img src={product.imageUrl} className="card-img-top" />
+                <div className="card-body">
+                  <h5 className="card-title">{product?.name}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    Price: ${product?.price}
+                  </h6>
+                  <button>
+                    <i className="fas fa-link"></i>Add to Cart
+                  </button>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
