@@ -11,7 +11,7 @@ const fetchProducts = (products) => {
 };
 
 //thunks
-export const allProductsThunk = (id) => {
+export const allProductsThunk = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`api/products`);
