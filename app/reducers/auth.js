@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
@@ -31,6 +32,19 @@ export const attemptLogin = (credentials)=> {
     const response = await axios.post('/api/auth', credentials);
     window.localStorage.setItem('token', response.data);
     dispatch(loginWithToken());
+  };
+};
+
+export const attemptRegister = (credentials) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/api/auth/register', credentials);
+      window.localStorage.setItem('token', response.data);
+      dispatch(loginWithToken());
+    } catch (error) {
+      console.error("Registration failed:", error.response.data);
+      throw error;
+    }
   };
 };
 

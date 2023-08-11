@@ -1,17 +1,17 @@
 # Basic Features
 
-- A user should be able to see products
+- A user should be able to see products (*)
 - A logged in user should be able to
-  - see the items in their cart
-  - add a new product to their cart
-  - remove an item from their cart
+  - see the items in their cart  (*)
+  - add a new product to their cart (yaseen)
+  - remove an item from their cart (yaseen)
   - create an order
 - A user should be able to see their orders
-- A user should be able to create an account
-- A user should be able to see their past orders
-- A non-logged in user should be able to add to their cart and have those items added to their cart after authenticating
-- A user should be able to review a product
-- A user should be able to update their profile
+- A user should be able to create an account (arek)
+- A user should be able to see their past orders (profile) (checkout button archives order to user id)
+- A non-logged in user should be able to add to their cart and have those items added to their cart after authenticating (merge local session with db)
+- A user should be able to review a product 
+- A user should be able to update their profile (andrew)
 - An administrator should be able to add a new product
 
 # Bonus Features
