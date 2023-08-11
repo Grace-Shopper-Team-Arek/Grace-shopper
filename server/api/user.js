@@ -10,6 +10,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+
 router.put("/:id", async (req, res, next) => {
     try {
         //first find user by PK instead of just calling User.update so you only 
@@ -24,6 +25,13 @@ router.put("/:id", async (req, res, next) => {
     } catch (err) {
         console.log(err);
         res.status(400).send("Bad request");
+
+router.post("/", async (req, res, next) => {
+    try {
+        const user = await User.create(req.body);
+        res.json(user);
+    } catch (err) {
+        next(err);
     }
 });
 
