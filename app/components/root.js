@@ -1,52 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 //components
-import Home from './Home';
-import Login from './Login';
-import Cart from './Cart';
-import UserProfile from './UserProfile';
+import Home from "./Home";
+import Login from "./Login";
+import Cart from "./Cart";
+import UserProfile from "./UserProfile";
+import Products from "./Products";
+import NavBar from "./Navbar";
+import Product from "./Product";
 
 //actions
-import { fetchUserProfileThunk } from '../reducers/fetchUserProfile';
+import { fetchUserProfileThunk } from "../reducers/fetchUserProfile";
 
-import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchCart } from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { loginWithToken, fetchCart } from "../store";
+import { Link, Routes, Route } from "react-router-dom";
 
-const App = ()=> {
-  const { auth } = useSelector(state => state);
+const App = () => {
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(loginWithToken());
   }, []);
 
-  useEffect(()=> {
-    if(auth.id){
+  useEffect(() => {
+    if (auth.id) {
       dispatch(fetchUserProfileThunk(auth.id));
       dispatch(fetchCart());
     }
   }, [auth]);
   return (
     <div>
+      <NavBar />
       <h1>Acme Shopping</h1>
-      {
-        auth.id ? <Home /> : <Login />
-      }
-      {
-        !!auth.id  && (
-          <div>
-            <nav>
-              <Link to='/'>Home</Link>
-              <Link to='/cart'>Cart</Link>
-              <Link to={`/users/${auth.id}`}>Profile</Link>
-            </nav>
+      {auth.id ? <Home /> : <Login />}
+      {!!auth.id && (
+        <div>
+          <main>
             <Routes>
-              <Route path='/cart' element={ <Cart /> } />
-              <Route path='/users/:id' element={ <UserProfile /> } />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/users/:id" element={<UserProfile />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<Product />} />
             </Routes>
-          </div>
-        )
-      }
+          </main>
+        </div>
+      )}
     </div>
   );
 };

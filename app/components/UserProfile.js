@@ -6,19 +6,26 @@ import UpdateProfile from "./UpdateProfile";
 
 const UserProfile = (props) => {
     const { id } = useParams(); 
-    // console.log(id)
     const { fetchUserProfile, userProfile } = props;
-    // console.log(props)
 
     useEffect(() => {
         fetchUserProfile(id); 
     }, [id]); 
 
     return (
-        <div>
-            <h1>{userProfile?.username}</h1>
-            <h2>{userProfile?.email}</h2>
-            <UpdateProfile/>
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-header">
+                    Profile
+                </div>
+                <div className="card-body">
+                    <h5 className="card-title">{userProfile?.username}</h5>
+                    <p className="card-text">
+                        <strong>Email:</strong> {userProfile?.email}
+                    </p>
+                    <UpdateProfile/>
+                </div>
+            </div>
         </div>
     );
 }
