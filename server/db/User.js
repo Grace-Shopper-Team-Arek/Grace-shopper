@@ -1,4 +1,5 @@
 const conn = require("./conn");
+require("dotenv").config();
 const { STRING, UUID, UUIDV4, ENUM } = conn.Sequelize;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -142,6 +143,7 @@ User.prototype.archiveOrders = async function ({ product, quantity }) {
 };
 
 User.addHook("beforeSave", async (user) => {
+  console.log("in the beforesave hook")
   if (user.changed("password")) {
     user.password = await bcrypt.hash(user.password, 5);
   }

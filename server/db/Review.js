@@ -14,7 +14,7 @@ const Review = conn.define("review",{
     },
     review: {
         type: TEXT,
-        allowNull: false,        
+        allowNull: false,
     }
 });
 

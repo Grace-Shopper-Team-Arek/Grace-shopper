@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom'; 
 import { fetchUserProfileThunk } from '../reducers/fetchUserProfile';
+import UpdateProfile from "./UpdateProfile";
 
 const UserProfile = (props) => {
     const { id } = useParams(); 
@@ -22,6 +23,7 @@ const UserProfile = (props) => {
                     <p className="card-text">
                         <strong>Email:</strong> {userProfile?.email}
                     </p>
+                    <UpdateProfile/>
                 </div>
             </div>
         </div>
