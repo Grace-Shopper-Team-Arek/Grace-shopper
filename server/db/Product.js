@@ -1,24 +1,24 @@
-const conn = require('./conn');
-const { STRING, UUID, UUIDV4, TEXT } = conn.Sequelize;
+const conn = require("./conn");
+const { STRING, UUID, UUIDV4, TEXT, SMALLINT } = conn.Sequelize;
 
-const Product = conn.define('product', {
+const Product = conn.define("product", {
   id: {
     type: UUID,
     primaryKey: true,
-    defaultValue: UUIDV4
+    defaultValue: UUIDV4,
   },
   name: {
     type: STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   description: {
     type: TEXT,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     },
     defaultValue: "Product description here",
   },
@@ -26,10 +26,19 @@ const Product = conn.define('product', {
     type: STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     },
-    defaultValue: "https://user-images.githubusercontent.com/5661040/43248183-3259e226-90e1-11e8-8574-87a33f5dfe6f.png"
-  }
+    defaultValue:
+      "https://user-images.githubusercontent.com/5661040/43248183-3259e226-90e1-11e8-8574-87a33f5dfe6f.png",
+  },
+  price: {
+    type: SMALLINT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+    defaultValue: 0,
+  },
 });
 
 module.exports = Product;

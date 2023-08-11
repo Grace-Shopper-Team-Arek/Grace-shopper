@@ -42,23 +42,27 @@ const syncAndSeed = async () => {
       description: "Mint-condition Babe Ruth rookie card",
       imageUrl:
         "https://robbreport.com/wp-content/uploads/2021/05/baberuth.jpg",
+      price: 2950,
     }),
     Product.create({
       name: "1991 Michael Jordan Card",
       description: "Mint-condition upper deck 1991 MJ baseball card",
       imageUrl:
         "https://ansel.frgimages.com/cincinnati-bengals/michael-jordan-1991-upper-deck-baseball-card-number-sp1-graded-psa-8_ss2_p-12996770+u-1gdx1rz2gpecu8hoxs5a+v-89420742250e43508bff97cf2be9ab06.jpg?_hv=2",
+      price: 540,
     }),
     Product.create({
       name: "2003 Lebron James Card",
       description: "Used Lebron James rookie card 03-04",
       imageUrl: "https://m.media-amazon.com/images/I/61GU83x7dSL.jpg",
+      price: 440,
     }),
     Product.create({
       name: "Dark Magician Yu-Gi-Oh Card",
       description: "2nd edition Dark Magician card",
       imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXrcP9QxIL-NEs3Cw6AoGI3Di1-ArNNnhiQ&usqp=CAU",
+      price: 10,
     }),
     User.create({
       username: "ethyl",
@@ -70,6 +74,7 @@ const syncAndSeed = async () => {
   const cart = await ethyl.getCart();
   await ethyl.addToCart({ product: bazz, quantity: 3 });
   await ethyl.addToCart({ product: foo, quantity: 2 });
+  await ethyl.addToCart({ product: bcard1, quantity: 1 });
   return {
     users: {
       moe,

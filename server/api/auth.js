@@ -20,7 +20,6 @@ app.get("/", async (req, res, next) => {
   }
 });
 
-//Register new user route
 app.post("/register", async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
