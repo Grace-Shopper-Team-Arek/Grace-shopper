@@ -13,24 +13,25 @@ function updateUserProfile(profile){
 
 //thunk
 export function updateUserProfileThunk(id, update){
-    console.log(update);
     return async dispatch => {
         try {
-            await axios.put(`api/users/:${id}`, update);
-            dispatch({type: UPDATE_USER_PROFILE, user: update})
+            const user = await axios.put(`api/users/:${id}`, update);
+            console.log(user.data);
+            dispatch({type: UPDATE_USER_PROFILE, update})
         } catch (error) {
             console.log("Invalid");
         }
     }
 }
 
-const initialState = [];
+const initialState = {};
 
 //reducer
 export default function (state = initialState, action){
+    console.log(action);
     switch (action.type) {
       case UPDATE_USER_PROFILE:
-        return action.products;
+        return {userProfile: action.update};
       default:
         return state;
     }

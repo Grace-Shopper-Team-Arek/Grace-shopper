@@ -21,7 +21,7 @@ router.put("/:id", async (req, res, next) => {
 
         const updatedUser = await userToUpdate.update(req.body);
 
-         res.end();
+        res.send(updatedUser.dataValues);
     } catch (err) {
         console.log(err);
         res.status(400).send("Bad request");
