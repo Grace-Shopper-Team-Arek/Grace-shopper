@@ -14,7 +14,6 @@ function UpdateProfile(props){
             updatedPW: event.target[2].value,
             confirmUpdPW: event.target[3].value,
         }
-console.log(props);
         const dataPackage = {};
 
         //verify data
@@ -27,11 +26,8 @@ console.log(props);
         }
 
         if(update.updatedPW && update.updatedPW.length > 0 && (update.updatedPW === update.confirmUpdPW)){
-            dataPackage.password = update.updatedPW ;/*await bcrypt.hash(update.updatedPW,5)*/
+            dataPackage.password = update.updatedPW ;
         }
-
-        // console.log(`update:`, update)
-        // console.log(`dataPackage:`, dataPackage);
 
         //send the update along to be implemented
         props.updateUserProfileThunk(props.userProfile.id, dataPackage);
@@ -53,7 +49,8 @@ console.log(props);
             </div><div>  
                 <label htmlFor="confirm-password">Retype updated password: </label>
                 <input type="text" name="password"/>
-                {/* For security reasons the "name" prop for the input fields should be omitted, but they make it easier to test*/}
+                {/* For security reasons the "name" prop for the password input fields 
+                should be omitted, but they make it easier to test*/}
             </div>
             <button type="submit">Submit</button>
         </form>
