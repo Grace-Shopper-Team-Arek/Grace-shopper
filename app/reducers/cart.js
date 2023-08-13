@@ -12,6 +12,8 @@ const cart = (state = { lineItems: [] }, action) => {
 export const fetchCart = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
+    console.log("INSIDE THE REDUCER - WINDOW.LOCAL.STORAGE");
+    console.log(token);
     const response = await axios.get("/api/orders/cart", {
       headers: {
         authorization: token,
@@ -21,12 +23,22 @@ export const fetchCart = () => {
   };
 };
 
-// export const addToCart = (product, quantity = 1) => {
-//   return async (dispatch) => {
-//     const token = window.localStorage.getItem("token");
-//     const { data: updated } = await axios.put(`/api/orders/cart`, product, quantity);
-//     dispatch({ type: "ADD_TO_CART", cart: updated });
-//   };
-// };
+export const addToCart = (product, quantity) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    console.log("INSIDE THE REDUCER - WINDOW.LOCAL.STORAGE");
+    console.log(token);
+    const response = await axios.put(`/api/orders/cart`, {
+      headers: {
+        authorization: token,
+      },
+      body: {
+        product,
+        quantity,
+      },
+    });
+    dispatch({ type: "ADD_TO_CART", cart: response.data });
+  };
+};
 
 export default cart;

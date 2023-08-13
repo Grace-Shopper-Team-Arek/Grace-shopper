@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  console.log("HERE IS THE LOCAL TOKEN FROM CART");
+  console.log(window.localStorage.getItem("token"));
+
   return (
     <div class="container mt-5 p-3 rounded cart">
       <div class="row no-gutters">

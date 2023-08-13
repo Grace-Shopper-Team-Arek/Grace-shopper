@@ -18,18 +18,18 @@ const Products = (props) => {
         <div className="col-md-4">
           {products.map((product) => (
             <div className="card">
-              <Link to={`/products/${product.id}`}>
-                <img src={product.imageUrl} className="card-img-top" />
-                <div className="card-body">
+              <img src={product.imageUrl} className="card-img-top" />
+              <div className="card-body">
+                <Link to={`/products/${product.id}`}>
                   <h5 className="card-title">{product?.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">
                     Price: ${product?.price}
                   </h6>
-                  <button>
-                    <i className="fas fa-link"></i>Add to Cart
-                  </button>
-                </div>
-              </Link>
+                </Link>
+                <button>
+                  <i className="fas fa-link"></i>Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
