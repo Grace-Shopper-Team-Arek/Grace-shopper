@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
+import ReviewProduct from "./ReviewProduct";
 
 const Product = (props) => {
   const { id } = useParams();
@@ -42,6 +43,7 @@ const Product = (props) => {
           </div>
         </div>
       </div>
+      <ReviewProduct />
     </div>
   );
 };
