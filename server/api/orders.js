@@ -15,8 +15,6 @@ app.post("/", async (req, res, next) => {
 
 app.get("/cart", async (req, res, next) => {
   try {
-    console.log("get cart API- REQ.HEADERS.AUTHORIZATION is here");
-    console.log(req.headers.authorization);
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getCart());
   } catch (ex) {
@@ -24,10 +22,8 @@ app.get("/cart", async (req, res, next) => {
   }
 });
 
-app.put("/cart", async (req, res, next) => {
+app.post("/cart", async (req, res, next) => {
   try {
-    console.log("put cart API- REQ.HEADERS.AUTHORIZATION is here");
-    console.log(req.headers.authorization);
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.addToCart(req.body));
   } catch (ex) {
@@ -35,14 +31,14 @@ app.put("/cart", async (req, res, next) => {
   }
 });
 
-// app.put("/cart", async (req, res, next) => {
-//   try {
-//     const user = await User.findByToken(req.headers.authorization);
-//     res.send(await user.removeFromCart(req.body));
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+app.put("/cart", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.removeFromCart(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 //Build out past orders api endpoints
 

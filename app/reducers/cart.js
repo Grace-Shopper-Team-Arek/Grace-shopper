@@ -6,14 +6,15 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "ADD_TO_CART") {
     return action.cart;
   }
+  if (action.type === "REMOVE_FROM_CART") {
+    return action.cart;
+  }
   return state;
 };
 
 export const fetchCart = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    console.log("INSIDE THE REDUCER - WINDOW.LOCAL.STORAGE");
-    console.log(token);
     const response = await axios.get("/api/orders/cart", {
       headers: {
         authorization: token,
@@ -26,18 +27,38 @@ export const fetchCart = () => {
 export const addToCart = (product, quantity) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    console.log("INSIDE THE REDUCER - WINDOW.LOCAL.STORAGE");
-    console.log(token);
-    const response = await axios.put(`/api/orders/cart`, {
-      headers: {
-        authorization: token,
-      },
-      body: {
+    const response = await axios.post(
+      `/api/orders/cart`,
+      {
         product,
         quantity,
       },
-    });
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
     dispatch({ type: "ADD_TO_CART", cart: response.data });
+  };
+};
+
+export const removeFromCart = (product, quantityToRemove) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.put(
+      `/api/orders/cart`,
+      {
+        product,
+        quantityToRemove,
+      },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    dispatch({ type: "REMOVE_FROM_CART", cart: response.data });
   };
 };
 
