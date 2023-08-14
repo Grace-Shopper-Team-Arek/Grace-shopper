@@ -6,6 +6,9 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "ADD_TO_CART") {
     return action.cart;
   }
+  if (action.type === "REMOVE_FROM_CART") {
+    return action.cart;
+  }
   return state;
 };
 
@@ -21,12 +24,42 @@ export const fetchCart = () => {
   };
 };
 
-// export const addToCart = (product, quantity = 1) => {
-//   return async (dispatch) => {
-//     const token = window.localStorage.getItem("token");
-//     const { data: updated } = await axios.put(`/api/orders/cart`, product, quantity);
-//     dispatch({ type: "ADD_TO_CART", cart: updated });
-//   };
-// };
+export const addToCart = (product, quantity) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.post(
+      `/api/orders/cart`,
+      {
+        product,
+        quantity,
+      },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    dispatch({ type: "ADD_TO_CART", cart: response.data });
+  };
+};
+
+export const removeFromCart = (product, quantityToRemove) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.put(
+      `/api/orders/cart`,
+      {
+        product,
+        quantityToRemove,
+      },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    dispatch({ type: "REMOVE_FROM_CART", cart: response.data });
+  };
+};
 
 export default cart;
