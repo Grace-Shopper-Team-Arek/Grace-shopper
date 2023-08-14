@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
+import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
 
-  console.log("HERE IS THE PRODUCT ID");
-  console.log(id);
-
   const { fetchProduct, product } = props;
-
-  console.log("HERE ARE THE PRODUCT PROPS");
-  console.log(props);
 
   useEffect(() => {
     fetchProduct(id);
@@ -32,8 +27,8 @@ const Product = (props) => {
                 Price: ${product?.price}
               </h6>
               <p className="card-text">{product?.description}</p>
-              <button>
-                <i className="fas fa-link"></i>Add to Cart
+              <button onClick={() => props.addToCart(product, 1)}>
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
               </button>
               <Link to={`/products`}>
                 <button>Back to Full Products Page</button>
@@ -49,12 +44,14 @@ const Product = (props) => {
 const mapStateToProps = (state) => {
   return {
     product: state.product,
+    cart: state.cart,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProduct: (id) => dispatch(oneProductThunk(id)),
+    addToCart: (prod, quant) => dispatch(addToCart(prod, quant)),
   };
 };
 
