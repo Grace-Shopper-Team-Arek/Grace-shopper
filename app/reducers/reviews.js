@@ -15,12 +15,14 @@ export function allReviewsOneProductThunk(productId){
     }
 }
 
-export async function addNewReview(review){
+export function addNewReview(review){
     
-    console.log("HEHREHEHEHEHEHEHSHJUEHEHRE");
     return async dispatch => {
         try {
             const newReview = await axios.post("api/reviews", review);
+            //pass the username into the new review object
+            newReview.username = review.username;
+            console.log(newReview);
             dispatch({type: ADD_NEW_REVIEW, newReview});
         } catch (error) {
             console.log(error);
@@ -34,7 +36,13 @@ export default function (state = {}, action){
         case GET_ALL_REVIEWS:
             return action.reviews.data;
         case ADD_NEW_REVIEW:
-            return state;
+            //move the username into the new review object
+            action.newReview.data.user = {username: action.newReview.username};
+
+            //put the new review into the array of reviews
+            const update = Array.from(state);
+            update.push(action.newReview.data);
+            return update;
         default:
             return state;
     }

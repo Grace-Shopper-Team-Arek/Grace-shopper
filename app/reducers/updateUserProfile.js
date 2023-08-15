@@ -16,7 +16,6 @@ export function updateUserProfileThunk(id, update){
     return async dispatch => {
         try {
             const user = await axios.put(`api/users/:${id}`, update);
-            console.log(user.data);
             dispatch({type: UPDATE_USER_PROFILE, update})
         } catch (error) {
             console.log("Invalid");

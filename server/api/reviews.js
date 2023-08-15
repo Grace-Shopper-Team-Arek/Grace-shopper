@@ -37,7 +37,7 @@ app.post("/", async (req, res, next) => {
             rating: req.body.reviewScore,
         }
         const response = await Review.create(newReview);
-        res.send(response.data);
+        res.send(response.dataValues);
     } catch (error) {
         console.log(error);
     }

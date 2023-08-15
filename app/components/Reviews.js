@@ -17,8 +17,8 @@ function Reviews(props){
         {reviews.map( x => {
             // console.log(x);
             return <div key={`${x.id}`} className="card">
-                <h5>{`${x.user.username}`} says: </h5>
-                <h6>{`${x.review}`}</h6>
+                <h6>{`${x.user.username}`} says: </h6>
+                <h5>{`${x.review}`}</h5>
                 <h4>{stars(parseInt(x.rating))}</h4>
             </div>
         })}

@@ -18,6 +18,7 @@ function ReviewProduct(props){
         const dataPackage = {
             productId: props.productId,
             userId: props.userId,
+            username: props.username,
         };
     
         dataPackage.reviewText = event.target[5].value;
@@ -56,6 +57,7 @@ function ReviewProduct(props){
 function mapStateToProps(state){
     return {
         userId: state.userProfile.id,
+        username: state.userProfile.username,
         productId: state.product.id,
     }
 }
