@@ -14,13 +14,16 @@ const NavBar = () => {
                         <NavLink exact activeClassName="active" className="nav-link" to="/">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to="/Cart">Cart</NavLink>
+                        <NavLink activeClassName="active" className="nav-link" to="/cart">Cart</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to="/Products">Products</NavLink>
+                        <NavLink activeClassName="active" className="nav-link" to="/products">Products</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to="/users/${auth.id}">Profile</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink activeClassName="active" className="nav-link" to="/order/past">Orders</NavLink>
                     </li>
                 </ul>
             </div>
