@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import addReview from "../reducers/addReview"
 
 function findRating(anArray){
     for(let i = 0; i < anArray.length -1; i++){
@@ -7,30 +8,36 @@ function findRating(anArray){
     }
 }
 
-function handleSubmit(event){
-    //stop the page from refreshing
-    event.preventDefault();
-
-    //grab the data
-    const dataPackage = {};
-
-    dataPackage.reviewText = event.target[5].value;
-    dataPackage.reviewScore = findRating(event.target);
-
-    console.log("HERE IS THE EVENT", event);
-    console.log("HERE'S WHAT I FOUND:", dataPackage);
-
-    //clear the form
-    event.target[0].checked = false;
-    event.target[1].checked = false;
-    event.target[2].checked = false;
-    event.target[3].checked = false;
-    event.target[4].checked = false;
-    event.target[5].value = "";
-}
-
 function ReviewProduct(props){
     console.log(props);
+
+    function handleSubmit(event){
+        //stop the page from refreshing
+        event.preventDefault();
+    
+        //grab the data
+        const dataPackage = {
+            productId: props.productId,
+            userId: props.userId,
+        };
+    
+        dataPackage.reviewText = event.target[5].value;
+        dataPackage.reviewScore = findRating(event.target);
+    
+        // console.log("HERE IS THE EVENT", event);
+        console.log("HERE'S WHAT I FOUND:", dataPackage);
+    
+        //clear the form
+        event.target[0].checked = false;
+        event.target[1].checked = false;
+        event.target[2].checked = false;
+        event.target[3].checked = false;
+        event.target[4].checked = false;
+        event.target[5].value = "";
+    
+        //send the data to be updated
+        addReview(dataPackage);
+    }
 
     return <div>
         <h3>Submit a Review for this product:</h3>
@@ -53,7 +60,7 @@ function ReviewProduct(props){
 function mapStateToProps(state){
     return {
         userId: state.userProfile.id,
-        productID: state.product.id,
+        productId: state.product.id,
     }
 }
 
