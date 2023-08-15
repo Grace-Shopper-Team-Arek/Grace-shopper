@@ -41,6 +41,21 @@ app.post("/", async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+app.put("/:id", async (req, res, next) => {
+    try {
+        const update = {
+            review: req.body.reviewText,
+            rating: req.body.reviewScore,
+        }
+        await Review.update(update, {
+            where: {id: req.body.reviewId}
+        });
+        return res.status(200).send("Update succeeded");
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = app;
