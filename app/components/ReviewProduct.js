@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import addReview from "../reducers/addReview"
+import { addNewReview } from "../reducers/reviews";
 
 function findRating(anArray){
     for(let i = 0; i < anArray.length -1; i++){
@@ -9,7 +9,6 @@ function findRating(anArray){
 }
 
 function ReviewProduct(props){
-    console.log(props);
 
     function handleSubmit(event){
         //stop the page from refreshing
@@ -24,9 +23,6 @@ function ReviewProduct(props){
         dataPackage.reviewText = event.target[5].value;
         dataPackage.reviewScore = findRating(event.target);
     
-        // console.log("HERE IS THE EVENT", event);
-        console.log("HERE'S WHAT I FOUND:", dataPackage);
-    
         //clear the form
         event.target[0].checked = false;
         event.target[1].checked = false;
@@ -35,8 +31,8 @@ function ReviewProduct(props){
         event.target[4].checked = false;
         event.target[5].value = "";
     
-        //send the data to be updated
-        addReview(dataPackage);
+        //send the data to be update
+        props.addNewReview(dataPackage);
     }
 
     return <div>
@@ -65,7 +61,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-
+    return {
+        addNewReview: (review) => dispatch(addNewReview(review)),
+    };
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ReviewProduct);

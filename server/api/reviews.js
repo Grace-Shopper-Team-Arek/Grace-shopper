@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express.Router();
-const { Review } = require("../db");
+const { Review, User } = require("../db/index");
 
 
 app.get("/", async (req, res, next) => {
@@ -14,10 +14,13 @@ app.get("/", async (req, res, next) => {
 
 app.get("/:id", async (req, res, next) => {
     try {
-        const {data} = await Review.findAll({
+        const data = await Review.findAll({
             where: {
                 productId: req.params.id,
-            }
+            },
+            include:[{
+                model: User, attributes: ["username"],
+            }]
         })
         res.send(data);
     } catch (error) {
@@ -27,7 +30,6 @@ app.get("/:id", async (req, res, next) => {
 
 app.post("/", async (req, res, next) => {
     try {
-        console.log("post body:", req.body);
         const newReview = {
             userId: req.body.userId,
             productId: req.body.productId,
@@ -35,7 +37,6 @@ app.post("/", async (req, res, next) => {
             rating: req.body.reviewScore,
         }
         const response = await Review.create(newReview);
-        console.log("post response: ", response);
         res.send(response.data);
     } catch (error) {
         console.log(error);

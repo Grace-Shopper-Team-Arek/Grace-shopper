@@ -28,7 +28,7 @@ const initialState = {};
 
 //reducer
 export default function (state = initialState, action){
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
       case UPDATE_USER_PROFILE:
         return {userProfile: action.update};

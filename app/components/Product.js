@@ -2,21 +2,23 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
+import { allReviewsOneProductThunk } from "../reducers/reviews";
 import ReviewProduct from "./ReviewProduct";
 
 const Product = (props) => {
   const { id } = useParams();
 
-  console.log("HERE IS THE PRODUCT ID");
-  console.log(id);
+  // console.log("HERE IS THE PRODUCT ID");
+  // console.log(id);
 
-  const { fetchProduct, product } = props;
+  const { fetchProduct, product, fetchReviews } = props;
 
-  console.log("HERE ARE THE PRODUCT PROPS");
-  console.log(props);
+  // console.log("HERE ARE THE PRODUCT PROPS");
+  // console.log(props);
 
   useEffect(() => {
     fetchProduct(id);
+    fetchReviews(id);
   }, [id]); //only runs once with [id] argument
 
   //Similar to using states -> want to listen to effect changes
@@ -57,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProduct: (id) => dispatch(oneProductThunk(id)),
+    fetchReviews: id => dispatch(allReviewsOneProductThunk(id)),
   };
 };
 
