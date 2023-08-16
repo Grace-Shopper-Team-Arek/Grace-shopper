@@ -23,7 +23,7 @@ app.get("/", async (req, res, next) => {
 app.post("/register", async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
-    newUser.generateToken();
+    newUser.token = newUser.generateToken();
     res.status(201).send(newUser);
   } catch (ex) {
     res

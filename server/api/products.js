@@ -22,6 +22,8 @@ app.post("/", async (req, res, next) => {
     if (user.userType === "ADMIN") {
       const newProduct = await Product.create(req.body);
       res.status(201).send(newProduct);
+    } else {
+      next;
     }
   } catch (ex) {
     res
