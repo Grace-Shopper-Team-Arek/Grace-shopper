@@ -1,19 +1,68 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
+import React from "react";
+import { useSelector, useDispatch, connect } from "react-redux";
+import { logout } from "../store";
 
-const Home = ()=> {
-  const { auth } = useSelector(state => state);
-  const dispatch = useDispatch();
-  return (
-    <div>
-      <h1>Home</h1>
+//need to reset state with function to use multiple dispatches
+//same check on addToCart thunk would be same for token
+
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  fullLogout = () => {
+    this.setState({
+      auth: {},
+      userProfile: {},
+      cart: { lineItems: [] },
+      updateUserProfile: {},
+    });
+    this.props.logout();
+  };
+
+  render() {
+    console.log("LOGGING PROPS");
+    console.log(this.props);
+    return (
       <div>
-        Welcome { auth.username }!!
-        <button onClick={()=> dispatch(logout())}>Logout</button>
+        <h1>Home</h1>
+        <div>
+          Welcome {this.props.state.auth.username}!!
+          <button onClick={this.fullLogout}>Logout</button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    state,
+  };
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+};
+
+// const Home = () => {
+//   const { auth, cart, userProfile } = useSelector((state) => state);
+//   const dispatch = useDispatch();
+//   const fullLogout = () => {
+//     dispatch(logout());
+
+//   };
+// return (
+//   <div>
+//     <h1>Home</h1>
+//     <div>
+//       Welcome {auth.username}!!
+//       <button onClick={fullLogout}>Logout</button>
+//     </div>
+//   </div>
+// );
+// };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
