@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
 import { Link } from "react-router-dom";
-import { removeFromCart } from "../reducers/cart";
+import { removeFromCart, fetchCart } from "../reducers/cart";
 import { connect } from "react-redux";
 
 const Cart = (props) => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCart(cart));
+  }, []);
 
   //calculate total price
   var totalPrice = cart.lineItems.reduce(
