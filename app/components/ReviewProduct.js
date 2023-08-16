@@ -12,8 +12,6 @@ function ReviewProduct(props){
     //find if the logged-in user has already reviewed product
     const existingReview = Array.from(props.reviews).filter(x => x.userId === props.userId)
     const alreadyReviewed = existingReview.length > 0;
-    const reviewText = existingReview[0]?.review;
-    const reviewRating = parseInt(existingReview[0]?.rating);
 
     function handleSubmit(event){
         //stop the page from refreshing
@@ -46,11 +44,6 @@ function ReviewProduct(props){
         <h3>{alreadyReviewed ? "Update your review of this product?": "Submit a Review for this product:"}</h3>
         <form onSubmit={handleSubmit}>
             <div>
-                {/* <input type="radio" id="star1" name="rating" value="1" checked={reviewRating === 1}/><label for="star1"></label>
-                <input type="radio" id="star2" name="rating" value="2" checked={reviewRating === 2}/><label for="star2"></label>
-                <input type="radio" id="star3" name="rating" value="3" checked={reviewRating === 3}/><label for="star3"></label>
-                <input type="radio" id="star4" name="rating" value="4" checked={reviewRating === 4}/><label for="star4"></label>
-                <input type="radio" id="star5" name="rating" value="5" checked={reviewRating === 5}/><label for="star5"></label> */}
                 <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
                 <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
                 <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
