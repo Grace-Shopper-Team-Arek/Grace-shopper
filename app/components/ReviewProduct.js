@@ -46,14 +46,19 @@ function ReviewProduct(props){
         <h3>{alreadyReviewed ? "Update your review of this product?": "Submit a Review for this product:"}</h3>
         <form onSubmit={handleSubmit}>
             <div>
-                <input type="radio" id="star1" name="rating" value="1" checked={reviewRating === 1}/><label for="star1"></label>
+                {/* <input type="radio" id="star1" name="rating" value="1" checked={reviewRating === 1}/><label for="star1"></label>
                 <input type="radio" id="star2" name="rating" value="2" checked={reviewRating === 2}/><label for="star2"></label>
                 <input type="radio" id="star3" name="rating" value="3" checked={reviewRating === 3}/><label for="star3"></label>
                 <input type="radio" id="star4" name="rating" value="4" checked={reviewRating === 4}/><label for="star4"></label>
-                <input type="radio" id="star5" name="rating" value="5" checked={reviewRating === 5}/><label for="star5"></label>
+                <input type="radio" id="star5" name="rating" value="5" checked={reviewRating === 5}/><label for="star5"></label> */}
+                <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
             </div>
             <div>
-                <textarea type="review" placeholder="Enter your review here!" style={{width: 500, height: 250}} defaultvalue={alreadyReviewed ? reviewText : ""} />
+                <textarea type="review" placeholder="Enter your review here!" style={{width: 500, height: 250}} />
             </div>
             <button type="submit">Submit</button>
         </form>
