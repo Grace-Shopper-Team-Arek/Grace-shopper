@@ -11,6 +11,7 @@ Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Product.hasMany(Review);
 User.hasMany(Review);
+Review.belongsTo(User);
 
 const syncAndSeed = async () => {
   await conn.sync({ force: true });

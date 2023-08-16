@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
+import { allReviewsOneProductThunk } from "../reducers/reviews";
+import ReviewProduct from "./ReviewProduct";
 import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
 
-  const { fetchProduct, product } = props;
-
+  const { fetchProduct, product, fetchReviews } = props;
   useEffect(() => {
     fetchProduct(id);
+    fetchReviews(id);
   }, [id]); //only runs once with [id] argument
 
   //Similar to using states -> want to listen to effect changes
@@ -37,6 +39,7 @@ const Product = (props) => {
           </div>
         </div>
       </div>
+      <ReviewProduct />
     </div>
   );
 };
@@ -51,6 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProduct: (id) => dispatch(oneProductThunk(id)),
+    fetchReviews: id => dispatch(allReviewsOneProductThunk(id)),
     addToCart: (prod, quant) => dispatch(addToCart(prod, quant)),
   };
 };

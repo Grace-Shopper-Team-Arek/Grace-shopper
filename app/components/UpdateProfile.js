@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateUserProfileThunk } from "../reducers/updateUserProfile";
 
 function UpdateProfile(props){
-console.log(props);
+// console.log(props);
     function handleSubmit(event){
         //stop the page from refreshing
         event.preventDefault();
