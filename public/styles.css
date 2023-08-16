@@ -43,3 +43,9 @@ button:focus {
   box-shadow: #222 1px 0 10px;
   text-decoration: underline;
 }
+
+.box {
+  background-color: green;
+  inline-size: 100px;
+  overflow-wrap: break-word;
+}

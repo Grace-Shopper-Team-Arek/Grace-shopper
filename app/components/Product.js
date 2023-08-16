@@ -4,18 +4,12 @@ import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
 import { allReviewsOneProductThunk } from "../reducers/reviews";
 import ReviewProduct from "./ReviewProduct";
+import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
 
-  // console.log("HERE IS THE PRODUCT ID");
-  // console.log(id);
-
   const { fetchProduct, product, fetchReviews } = props;
-
-  // console.log("HERE ARE THE PRODUCT PROPS");
-  // console.log(props);
-
   useEffect(() => {
     fetchProduct(id);
     fetchReviews(id);
@@ -35,8 +29,8 @@ const Product = (props) => {
                 Price: ${product?.price}
               </h6>
               <p className="card-text">{product?.description}</p>
-              <button>
-                <i className="fas fa-link"></i>Add to Cart
+              <button onClick={() => props.addToCart(product, 1)}>
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
               </button>
               <Link to={`/products`}>
                 <button>Back to Full Products Page</button>
@@ -53,6 +47,7 @@ const Product = (props) => {
 const mapStateToProps = (state) => {
   return {
     product: state.product,
+    cart: state.cart,
   };
 };
 
@@ -60,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchProduct: (id) => dispatch(oneProductThunk(id)),
     fetchReviews: id => dispatch(allReviewsOneProductThunk(id)),
+    addToCart: (prod, quant) => dispatch(addToCart(prod, quant)),
   };
 };
 

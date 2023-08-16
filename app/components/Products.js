@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { allProductsThunk } from "../reducers/products";
+import { addToCart } from "../reducers/cart";
 
 const Products = (props) => {
   const { fetchProducts, products } = props;
@@ -18,18 +19,18 @@ const Products = (props) => {
         <div className="col-md-4">
           {products.map((product) => (
             <div className="card">
-              <Link to={`/products/${product.id}`}>
-                <img src={product.imageUrl} className="card-img-top" />
-                <div className="card-body">
+              <img src={product.imageUrl} className="card-img-top" />
+              <div className="card-body">
+                <Link to={`/products/${product.id}`}>
                   <h5 className="card-title">{product?.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">
                     Price: ${product?.price}
                   </h6>
-                  <button>
-                    <i className="fas fa-link"></i>Add to Cart
-                  </button>
-                </div>
-              </Link>
+                </Link>
+                <button onClick={() => props.addToCart(product, 1)}>
+                  <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -41,12 +42,14 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    cart: state.cart,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProducts: () => dispatch(allProductsThunk()),
+    addToCart: (prod, quant) => dispatch(addToCart(prod, quant)),
   };
 };
 
