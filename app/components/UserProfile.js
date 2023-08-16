@@ -5,9 +5,8 @@ import { fetchUserProfileThunk } from "../reducers/fetchUserProfile";
 import UpdateProfile from "./UpdateProfile";
 
 const UserProfile = (props) => {
-  const { id } = useParams();
-  const { fetchUserProfile, userProfile, updateUserProfile } = props;
-  console.log(props);
+    const { id } = useParams(); 
+    const { fetchUserProfile, userProfile, updateUserProfile } = props;
 
   useEffect(() => {
     fetchUserProfile(userProfile.id);

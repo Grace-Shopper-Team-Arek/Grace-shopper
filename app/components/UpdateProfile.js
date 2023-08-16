@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { updateUserProfileThunk } from "../reducers/updateUserProfile";
+import { updateUserProfileThunk } from "../reducers/fetchUserProfile";
 
 function UpdateProfile(props){
 // console.log(props);
