@@ -10,6 +10,7 @@ import Products from "./Products";
 import NavBar from './Navbar';
 import Register from "./Register";
 import Product from "./Product";
+import Reviews from "./Reviews";
 import PastOrders from "./PastOrders";
 
 //actions
@@ -47,7 +48,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/users/:id" element={<UserProfile />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<Product />} />
+            <Route path="/products/:id" element={<div><Product /> <Reviews /></div>} />
             <Route path="/order/past" element={<PastOrders />} />
           </>
         )}
