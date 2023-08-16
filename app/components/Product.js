@@ -9,6 +9,7 @@ import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
+  console.log(window.localStorage);
 
   const { fetchProduct, product, fetchReviews } = props;
   useEffect(() => {
@@ -40,7 +41,7 @@ const Product = (props) => {
           </div>
         </div>
       </div>
-      <ReviewProduct />
+      {window.localStorage.token ? <ReviewProduct /> : ""}
       <Reviews />
     </div>
   );
