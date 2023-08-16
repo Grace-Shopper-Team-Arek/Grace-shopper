@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { oneProductThunk } from "../reducers/product";
 import { allReviewsOneProductThunk } from "../reducers/reviews";
 import ReviewProduct from "./ReviewProduct";
+import Reviews from "./Reviews";
 import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
@@ -40,6 +41,7 @@ const Product = (props) => {
         </div>
       </div>
       <ReviewProduct />
+      <Reviews />
     </div>
   );
 };
