@@ -125,9 +125,9 @@ const syncAndSeed = async () => {
     for(let j = 0; j < products.length; j++){
       const rating = getRndInteger(0,5)
       const reviewText = getRndInteger(0,5)
-      const act = getRndInteger(1,3)
+      const addIt = getRndInteger(1,3)
       // console.log("rating: ",rating+1," text: ", reviewText, act === 1 ? "Added" : "Not added")
-      if(act === 1){
+      if(addIt === 1){
         await Review.create({
           userId: users[i].id,
           productId: products[j].id,
