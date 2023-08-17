@@ -13,8 +13,6 @@ function stars(starCount){
 function Reviews(props){
     const reviews = Array.from(props.reviews);
 
-    console.log("Happy harry");
-
     return <div>
         {reviews.map( x => {
             return <div key={`${x.id}`} className="card">

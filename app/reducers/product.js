@@ -22,6 +22,16 @@ export const oneProductThunk = (id) => {
   };
 };
 
+export function addProduct(product){
+  return async () => {
+    try {
+      await axios.post("api/products", product, {headers: {authorization: window.localStorage.getItem("token")}});
+    } catch (error) {
+      console.log(error) 
+    }
+  }
+}
+
 const initialState = {};
 
 //reducers
