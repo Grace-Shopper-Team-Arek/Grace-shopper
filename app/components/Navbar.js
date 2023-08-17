@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
+  const token = window.localStorage.token;
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +29,7 @@ const NavBar = () => {
               Products
             </NavLink>
           </li>
-          <li className="nav-item">
+          { (token && token !== "guest") ? <li className="nav-item">
             <NavLink
               activeClassName="active"
               className="nav-link"
@@ -36,10 +37,10 @@ const NavBar = () => {
             >
               Profile
             </NavLink>
-          </li>
-    <li className="nav-item">
+          </li> : ""}
+    {(token && token !== "guest") ? <li className="nav-item">
                         <NavLink activeClassName="active" className="nav-link" to="/order/past">Orders</NavLink>
-                    </li>
+                    </li> : "" }
         </ul>
       </div>
     </nav>
