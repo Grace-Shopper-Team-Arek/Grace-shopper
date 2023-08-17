@@ -12,7 +12,7 @@
 - A non-logged in user should be able to add to their cart and have those items added to their cart after authenticating (merge local session with db) (Yaseen - WIP)
 - A user should be able to review a product (Andrew - Done)
 - A user should be able to update their profile (Andrew - Done)
-- An administrator should be able to add a new product (Andrew - WIP)
+- An administrator should be able to add a new product (Andrew - Done)
 
 # Bonus Features
 - A user should be able to search for products
