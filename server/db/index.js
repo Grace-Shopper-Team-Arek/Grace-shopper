@@ -124,16 +124,17 @@ const syncAndSeed = async () => {
   for(let i = 0; i < users.length; i++){
     for(let j = 0; j < products.length; j++){
       const rating = getRndInteger(0,5)
-      const reviewText = getRndInteger(0,5)
       const addIt = getRndInteger(1,3)
       // console.log("rating: ",rating+1," text: ", reviewText, act === 1 ? "Added" : "Not added")
       if(addIt === 1){
+        const reviewText = reviews[rating.toString()].shift();
         await Review.create({
           userId: users[i].id,
           productId: products[j].id,
           rating: (rating + 1).toString(),
-          review: reviews[rating.toString()][reviewText],
+          review: reviewText,
         });
+        reviews[rating.toString()].push(reviewText);
       }
     }
   }
