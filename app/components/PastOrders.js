@@ -5,8 +5,6 @@ import { fetchPastOrdersThunk } from '../reducers/fetchPastOrders';
 const PastOrders = (props) => {
     const { fetchPastOrders, pastOrders, auth } = props;
 
-    console.log(props)
-
     useEffect(() => {
         if (auth.id) {
             fetchPastOrders(auth.id);
@@ -23,16 +21,22 @@ const PastOrders = (props) => {
                     {pastOrders && pastOrders.length === 0 ? (
                         <p>You have no past orders.</p>
                     ) : (
-                        <div>
+                        <ul className="list-group">
                             {pastOrders && pastOrders?.lineItems?.map(order => (
-                                <div key={order.id}>
-                                    <strong>''</strong> {order.product.imageUrl}
-                                    <strong>Name:</strong> {order.product.name}
-                                    <strong>Order ID:</strong> {order.id}
-                                    <strong>Quantity:</strong> {order.quantity}
-                                </div>
+                                <li key={order.id} className="list-group-item mb-3">
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <img src={order.product.imageUrl} alt={order.product.name} className="img-fluid" />
+                                        </div>
+                                        <div className="col-md-9">
+                                            <strong>Name:</strong> {order.product.name}<br />
+                                            <strong>Order ID:</strong> {order.id}<br />
+                                            <strong>Quantity:</strong> {order.quantity}
+                                        </div>
+                                    </div>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     )}
                 </div>
             </div>
