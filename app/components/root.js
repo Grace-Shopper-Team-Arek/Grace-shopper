@@ -41,7 +41,7 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <h1>Acme Shopping</h1>
+      <h1>E-Card-merce: Buy & Sell Trading Cards</h1>
       <Routes>
         <Route path="/" element={auth.id ? <Home /> : <GuestHome />} />
         <Route path="/register" element={<Register />} />
