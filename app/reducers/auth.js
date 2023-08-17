@@ -14,6 +14,7 @@ const auth = (state = {}, action) => {
 export const logout = () => {
   console.log(window.localStorage);
   window.localStorage.removeItem("token");
+  console.log("HERE WE ARE TESTING THE UPDATE");
   return {
     type: "LOG_OUT",
     auth: {},
