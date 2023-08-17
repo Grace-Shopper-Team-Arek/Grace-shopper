@@ -16,11 +16,12 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   return {
     type: "LOG_OUT",
-    state: {
-      cart: { lineItem: [] },
-      auth: {},
-      userProfile: {},
-    }
+
+    cart: {},
+    updateUserProfile: {},
+    auth: {},
+    userProfile: {},
+
   };
 };
 
