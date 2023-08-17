@@ -4,9 +4,9 @@ import logger from "redux-logger";
 import auth from "./reducers/auth";
 import cart from "./reducers/cart";
 import userProfile from "./reducers/fetchUserProfile";
+import updateUserProfile from "./reducers/fetchUserProfile";
 import products from "./reducers/products";
 import product from "./reducers/product";
-import updateUserProfile from "./reducers/updateUserProfile";
 import pastOrders from "./reducers/fetchPastOrders";
 import reviews from "./reducers/reviews";
 
