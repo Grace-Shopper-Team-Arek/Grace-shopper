@@ -15,7 +15,7 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   return {
     type: "LOG_OUT",
-    cart: { lineItem: [] },
+    cart: {},
     updateUserProfile: {},
     auth: {},
     userProfile: {},
