@@ -2,8 +2,6 @@ const express = require("express");
 const app = express.Router();
 const { User } = require("../db");
 
-module.exports = app;
-
 app.post("/", async (req, res, next) => {
   try {
     res.send(await User.authenticate(req.body));
@@ -23,11 +21,13 @@ app.get("/", async (req, res, next) => {
 app.post("/register", async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
-    newUser.generateToken();
-    res.status(201).send(newUser);
+    const token = newUser.generateToken();
+    res.status(201).send({...newUser, token});
   } catch (ex) {
     res
       .status(500)
       .json({ message: "Error registering new user", error: ex.message });
   }
 });
+
+module.exports = app; 

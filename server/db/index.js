@@ -5,12 +5,14 @@ const Order = require("./Order");
 const LineItem = require("./LineItem");
 const Review = require("./Review");
 
+
 Order.belongsTo(User);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Product.hasMany(Review);
 User.hasMany(Review);
+
 
 const syncAndSeed = async () => {
   await conn.sync({ force: true });
@@ -71,26 +73,14 @@ const syncAndSeed = async () => {
     }),
   ]);
 
-  const cart = await ethyl.getCart();
-  await ethyl.addToCart({ product: bazz, quantity: 3 });
-  await ethyl.addToCart({ product: foo, quantity: 2 });
-  await ethyl.addToCart({ product: bcard1, quantity: 1 });
-  return {
-    users: {
-      moe,
-      lucy,
-      larry,
-    },
-    products: {
-      foo,
-      bar,
-      bazz,
-      bcard1,
-      bcard2,
-      bcard3,
-      gcard1,
-    },
-  };
+  const ethylOrder = await Order.create({ userId: ethyl.id, fulfilled: true });
+
+  await LineItem.create({ orderId: ethylOrder.id, productId: bazz.id, quantity: 3 });
+  await LineItem.create({ orderId: ethylOrder.id, productId: foo.id, quantity: 2 });
+  await LineItem.create({ orderId: ethylOrder.id, productId: bcard1.id, quantity: 1 });  
+
+  ethylOrder.fulfilled = true;
+  await ethylOrder.save();
 };
 
 module.exports = {

@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { INTEGER, UUID, UUIDV4 } = conn.Sequelize;
+const { INTEGER, UUID, UUIDV4, BOOLEAN } = conn.Sequelize;
 
 const LineItem = conn.define('lineItem', {
   id: {

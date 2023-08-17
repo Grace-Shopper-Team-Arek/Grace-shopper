@@ -39,7 +39,8 @@ export const attemptRegister = (credentials) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/api/auth/register', credentials);
-      window.localStorage.setItem('token', response.data);
+      console.log(response.data)
+      window.localStorage.setItem('token', response.data.token);
       dispatch(loginWithToken());
     } catch (error) {
       console.error("Registration failed:", error.response.data);

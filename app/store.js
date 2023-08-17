@@ -7,6 +7,7 @@ import userProfile from "./reducers/fetchUserProfile";
 import products from "./reducers/products";
 import product from "./reducers/product";
 import updateUserProfile from "./reducers/updateUserProfile";
+import pastOrders from "./reducers/fetchPastOrders";
 
 const reducer = combineReducers({
   auth,
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   products,
   product,
   updateUserProfile,
+  pastOrders,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
