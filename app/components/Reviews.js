@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 function stars(starCount){
     let rating = [];
     for(let i = 1; i < 6; i++){
-        rating.push(<i class="fa fa-fw fa-star" style={{color: `${starCount >= i ? "#ff0" : "#000"}`, "font-size": "12pt", "-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": "black"}}/>)
+        rating.push(<i key={`${"star" + i}`} className="fa fa-fw fa-star" style={{color: `${starCount >= i ? "#ff0" : "#000"}`, "fontSize": "12pt", "WebkitTextStrokeWidth": "1px", "WebkitTextStrokeColor": "black"}}/>)
     }
     return rating;
 }

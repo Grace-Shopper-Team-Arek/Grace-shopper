@@ -6,7 +6,7 @@ const auth = (state = {}, action) => {
   }
   if (action.type === "LOG_OUT") {
     console.log(action);
-    return action.state;
+    return action.auth;
   }
   return state;
 };
@@ -16,12 +16,7 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   return {
     type: "LOG_OUT",
-
-    cart: {},
-    updateUserProfile: {},
     auth: {},
-    userProfile: {},
-
   };
 };
 
