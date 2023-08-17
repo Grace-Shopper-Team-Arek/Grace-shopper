@@ -3,17 +3,17 @@ import { allReviewsOneProductThunk } from "../reducers/reviews";
 import { connect } from 'react-redux';
 
 function stars(starCount){
-    let rating = "";
+    let rating = [];
+    // <i class="fa fa-fw fa-star" style={{color: `${this.state.rating >= i ? "#ff0" : "#000"}`, "-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": "black"}}/>
     for(let i = 1; i < 6; i++){
-        rating = i > starCount ? rating.concat("☆") : rating.concat("★")
+        rating.push(<i class="fa fa-fw fa-star" style={{color: `${starCount >= i ? "#ff0" : "#000"}`, "font-size": "12pt", "-webkit-text-stroke-width": "1px", "-webkit-text-stroke-color": "black"}}/>)
+        // rating = i > starCount ? rating.concat("☆") : rating.concat("★")
     }
     return rating;
 }
 
 function Reviews(props){
     const reviews = Array.from(props.reviews);
-
-    console.log("Happy harry");
 
     return <div>
         {reviews.map( x => {

@@ -5,7 +5,8 @@ const auth = (state = {}, action) => {
     return action.auth;
   }
   if (action.type === "LOG_OUT") {
-    return {};
+    console.log(action);
+    return action.state;
   }
   return state;
 };
@@ -15,10 +16,12 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   return {
     type: "LOG_OUT",
+
     cart: {},
     updateUserProfile: {},
     auth: {},
     userProfile: {},
+
   };
 };
 

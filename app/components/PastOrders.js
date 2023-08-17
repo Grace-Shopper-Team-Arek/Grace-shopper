@@ -1,47 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginWithToken } from '../store';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchPastOrdersThunk } from '../reducers/fetchPastOrders';
 
-const PastOrders = () => {
-    const [pastOrders, setPastOrders] = useState([]);
-    const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
+const PastOrders = (props) => {
+    const { fetchPastOrders, pastOrders, auth } = props;
+
+    console.log(props)
 
     useEffect(() => {
-        dispatch(loginWithToken()).then(() => {
-            getPastOrders();
-        });
-    }, [dispatch]);
-
-    const getPastOrders = async () => {
-        try {
-            const { data } = await axios.get('/api/order/past', {
-                headers: { authorization: auth.token }
-            });
-            
-            setPastOrders(data);
-        } catch (error) {
-            console.error("Error fetching past orders:", error);
+        if (auth.id) {
+            fetchPastOrders(auth.id);
         }
-    };
+    }, [auth]);
 
     return (
-        <div>
-            <h2>Past Orders</h2>
-            {pastOrders.length === 0 ? (
-                <p>You have no past orders.</p>
-            ) : (
-                <ul>
-                    {pastOrders.map(order => (
-                        <li key={order.id}>
-                            <strong>Order ID:</strong> {order.id}
-                        </li>
-                    ))}
-                </ul>
-            )}
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-header">
+                    Past Orders
+                </div>
+                <div className="card-body">
+                    {pastOrders && pastOrders.length === 0 ? (
+                        <p>You have no past orders.</p>
+                    ) : (
+                        <div>
+                            {pastOrders && pastOrders?.lineItems?.map(order => (
+                                <div key={order.id}>
+                                    <strong>Name:</strong> {order.product.name}
+                                    <strong>Order ID:</strong> {order.id}
+                                    <strong>Quantity:</strong> {order.quantity}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
 
-export default PastOrders;
+const mapStateToProps = (state) => {
+    return {
+        pastOrders: state.pastOrders,
+        auth: state.auth
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchPastOrders: (token) => dispatch(fetchPastOrdersThunk(token)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PastOrders);
