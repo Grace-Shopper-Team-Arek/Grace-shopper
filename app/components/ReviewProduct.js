@@ -12,6 +12,8 @@ function ReviewProduct(props){
     //find if the logged-in user has already reviewed product
     const existingReview = Array.from(props.reviews).filter(x => x.userId === props.userId)
     const alreadyReviewed = existingReview.length > 0;
+    console.log(existingReview)
+    let rating = parseInt(existingReview[0]?.rating);
 
     function handleSubmit(event){
         //stop the page from refreshing
@@ -38,6 +40,36 @@ function ReviewProduct(props){
     
         //send the data to be updated
         alreadyReviewed ? props.updateReview(dataPackage) : props.addNewReview(dataPackage);
+    }
+
+    class Stars extends React.Component{
+        constructor(){
+            super()
+            this.state = {rating: rating}
+            this.handleStars = this.handleStars.bind(this);
+        }
+
+        handleStars(event){
+            const starRating = parseInt(event.target.attributes.value.value);
+            this.setState({rating: starRating});
+            rating = starRating;
+        }
+
+        render(){
+            let stars = [];
+            for(let i = 1; i < 6; i++){
+                stars.push(<label><i class="fa fa-fw fa-star" 
+                        value={i} 
+                        style={{color: `${this.state.rating >= i ? "#ff0" : "#000"}`, "font-size": "20pt", "-webkit-text-stroke-width": "2px", "-webkit-text-stroke-color": "black"}} 
+                        onClick={this.handleStars}
+                    />
+                </label>)
+            }
+            return <div>
+            <label style={{"font-size": "15pt"}}>Your rating:</label>{"   "}
+                {stars}
+            </div>
+        }
     }
 
     return <div>

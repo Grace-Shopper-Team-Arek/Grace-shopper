@@ -12,7 +12,7 @@ const cart = (state = { lineItems: [] }, action) => {
   return state;
 };
 
-//state of cart passed through (if token is null, pass through empty state of cart for non-logged-in user)
+//If token is null, create temp cart within local storage and set token to "guest"
 export const fetchCart = (cart) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
@@ -37,14 +37,40 @@ export const fetchCart = (cart) => {
   };
 };
 
+//If token is guest, update local storage cart and check local cart state for product in lineItems
 export const addToCart = (product, quantity) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    if (token === "guest") {
-      const cart = JSON.parse(window.localStorage.getItem("cart"));
-      cart.lineItems.push({ product, quantity });
-      window.localStorage.setItem("cart", cart);
-      dispatch({ type: "ADD_TO_CART", cart: cart });
+    if (token === null) {
+      window.localStorage.setItem("token", "guest");
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ lineItems: [{ product, quantity }] })
+      );
+      const cartdata = JSON.parse(window.localStorage.getItem("cart"));
+      dispatch({ type: "ADD_TO_CART", cart: cartdata });
+    } else if (token === "guest") {
+      let cartdata = JSON.parse(window.localStorage.getItem("cart"));
+      const prodCheck = cartdata.lineItems.filter(
+        (lineItem) => lineItem.product.id === product.id
+      );
+      if (prodCheck.length === 0) {
+        cartdata.lineItems.push({ product, quantity });
+        window.localStorage.setItem("cart", JSON.stringify(cartdata));
+        dispatch({ type: "ADD_TO_CART", cart: cartdata });
+      } else {
+        const updatedCart = cartdata.lineItems.map(function (item) {
+          if (item.product.id === product.id) {
+            item.quantity++;
+          }
+          return item;
+        });
+        window.localStorage.setItem(
+          "cart",
+          JSON.stringify({ lineItems: updatedCart })
+        );
+        dispatch({ type: "ADD_TO_CART", cart: { lineItems: updatedCart } });
+      }
     } else {
       const response = await axios.post(
         `/api/orders/cart`,
@@ -63,22 +89,40 @@ export const addToCart = (product, quantity) => {
   };
 };
 
+//Remove from cart reducer. If token = 'guest', update local cart in storage
 export const removeFromCart = (product, quantityToRemove) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    const response = await axios.put(
-      `/api/orders/cart`,
-      {
-        product,
-        quantityToRemove,
-      },
-      {
-        headers: {
-          authorization: token,
+    if (token === "guest") {
+      let cartdata = JSON.parse(window.localStorage.getItem("cart"));
+
+      const reducedCart = cartdata.lineItems.map(function (item) {
+        if (item.product.id === product.id) {
+          item.quantity--;
+        }
+        return item;
+      });
+      const updatedCart = reducedCart.filter((item) => item.quantity !== 0);
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ lineItems: updatedCart })
+      );
+      dispatch({ type: "REMOVE_FROM_CART", cart: { lineItems: updatedCart } });
+    } else {
+      const response = await axios.put(
+        `/api/orders/cart`,
+        {
+          product,
+          quantityToRemove,
         },
-      }
-    );
-    dispatch({ type: "REMOVE_FROM_CART", cart: response.data });
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch({ type: "REMOVE_FROM_CART", cart: response.data });
+    }
   };
 };
 

@@ -12,15 +12,15 @@ const auth = (state = {}, action) => {
 };
 
 export const logout = () => {
-  console.log(window.localStorage);
   window.localStorage.removeItem("token");
   return {
     type: "LOG_OUT",
-    state: {
-      cart: { lineItem: [] },
-      auth: {},
-      userProfile: {},
-    }
+
+    cart: {},
+    updateUserProfile: {},
+    auth: {},
+    userProfile: {},
+
   };
 };
 

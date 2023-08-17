@@ -13,7 +13,7 @@ const Cart = (props) => {
   }, []);
 
   //calculate total price
-  var totalPrice = cart.lineItems.reduce(
+  var totalPrice = cart?.lineItems?.reduce(
     (acc, currVal) => acc + currVal.product.price * currVal.quantity,
     0
   );
@@ -30,7 +30,9 @@ const Cart = (props) => {
               </Link>
             </div>
             <hr />
-            <h3 class="mb-0">Shopping Cart: {cart.lineItems.length} item(s)</h3>
+            <h3 class="mb-0">
+              Shopping Cart: {cart?.lineItems?.length} item(s)
+            </h3>
             <hr />
             <div class="d-flex justify-content-between">
               <span> Item Details </span>
