@@ -11,18 +11,18 @@ const NavBar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <NavLink exact activeClassName="active" className="nav-link" to="/">
+            <NavLink activeclassname="active" className="nav-link" to="/">
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/Cart">
+            <NavLink activeclassname="active" className="nav-link" to="/Cart">
               Cart
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
-              activeClassName="active"
+              activeclassname="active"
               className="nav-link"
               to="/Products"
             >
@@ -31,7 +31,7 @@ const NavBar = () => {
           </li>
           { (token && token !== "guest") ? <li className="nav-item">
             <NavLink
-              activeClassName="active"
+              activeclassname="active"
               className="nav-link"
               to="/users/:id"
             >
@@ -39,7 +39,7 @@ const NavBar = () => {
             </NavLink>
           </li> : ""}
     {(token && token !== "guest") ? <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to="/order/past">Orders</NavLink>
+                        <NavLink activeclassname="active" className="nav-link" to="/order/past">Orders</NavLink>
                     </li> : "" }
         </ul>
       </div>
