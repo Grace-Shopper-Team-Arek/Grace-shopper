@@ -9,7 +9,6 @@ import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
-  console.log(window.localStorage);
 
   const { fetchProduct, product, fetchReviews } = props;
   useEffect(() => {
