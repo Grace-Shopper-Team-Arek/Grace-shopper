@@ -26,6 +26,7 @@ const PastOrders = (props) => {
                         <div>
                             {pastOrders && pastOrders?.lineItems?.map(order => (
                                 <div key={order.id}>
+                                    <strong>''</strong> {order.product.imageUrl}
                                     <strong>Name:</strong> {order.product.name}
                                     <strong>Order ID:</strong> {order.id}
                                     <strong>Quantity:</strong> {order.quantity}

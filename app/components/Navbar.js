@@ -39,7 +39,7 @@ const NavBar = () => {
             </NavLink>
           </li> : ""}
     {(token && token !== "guest") ? <li className="nav-item">
-                        <NavLink activeClassName="active" className="nav-link" to="/order/past">Orders</NavLink>
+                        <NavLink activeClassName="active" className="nav-link" to="/orders/past">Orders</NavLink>
                     </li> : "" }
         </ul>
       </div>
