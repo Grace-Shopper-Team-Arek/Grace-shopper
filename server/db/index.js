@@ -43,13 +43,13 @@ const syncAndSeed = async () => {
     Product.create({ 
       name: "Base Set Holographic Charizard", 
       description: "Card 4 of 102 of the Pokémon TCG base set",
-      imageUrl: "https://archives.bulbagarden.net/media/upload/4/4e/CharizardBaseSet4.jpg",
+      imageUrl: "https://i.imgur.com/bmWLiYq.jpg",
       price: 50,
     }),
     Product.create({ 
       name: "Surfing Pikachu",
       description: "Promotional card feature Pikachu on a surfboard",
-      imageUrl: "https://archives.bulbagarden.net/media/upload/thumb/1/1a/SurfingPikachuWizardsPromo28.jpg/648px-SurfingPikachuWizardsPromo28.jpg",
+      imageUrl: "https://i.imgur.com/soFWuyI.jpg",
       price: 15,
     }),
     Product.create({ 
