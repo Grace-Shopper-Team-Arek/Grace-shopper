@@ -16,8 +16,6 @@ const cart = (state = { lineItems: [] }, action) => {
 export const fetchCart = (cart) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    console.log("HERE IS THE LOCAL STORAGE TOKEN FROM fetchCart");
-    console.log(token);
     if (token === null) {
       window.localStorage.setItem("token", "guest");
       window.localStorage.setItem("cart", JSON.stringify({ lineItems: [] }));
@@ -72,6 +70,8 @@ export const addToCart = (product, quantity) => {
         dispatch({ type: "ADD_TO_CART", cart: { lineItems: updatedCart } });
       }
     } else {
+      console.log("HERE IS THE PRODUCT DETAILS, WITHIN ADD_TO_CART", product);
+      console.log("TESTING TESTING TWSTING");
       const response = await axios.post(
         `/api/orders/cart`,
         {

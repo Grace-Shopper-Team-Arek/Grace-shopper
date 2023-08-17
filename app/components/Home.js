@@ -21,8 +21,6 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log("LOGGING PROPS");
-    console.log(this.props);
     return (
       <div>
         <h1>Home</h1>

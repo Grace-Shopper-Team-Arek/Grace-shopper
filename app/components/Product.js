@@ -9,7 +9,6 @@ import { addToCart } from "../reducers/cart";
 
 const Product = (props) => {
   const { id } = useParams();
-  console.log(window.localStorage);
 
   const { fetchProduct, product, fetchReviews } = props;
   useEffect(() => {
@@ -32,7 +31,7 @@ const Product = (props) => {
               </h6>
               <p className="card-text">{product?.description}</p>
               <button onClick={() => props.addToCart(product, 1)}>
-                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                <i className="fa-solid fa-cart-plus"></i> Add to Cart
               </button>
               <Link to={`/products`}>
                 <button>Back to Full Products Page</button>

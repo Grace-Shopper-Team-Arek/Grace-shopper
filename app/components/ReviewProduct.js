@@ -50,15 +50,15 @@ function ReviewProduct(props){
         render(){
             let stars = [];
             for(let i = 1; i < 6; i++){
-                stars.push(<label><i class="fa fa-fw fa-star" 
+                stars.push(<label key={`${"ratingStar" + i}`}><i className="fa fa-fw fa-star"
                         value={i} 
-                        style={{color: `${this.state.rating >= i ? "#ff0" : "#000"}`, "font-size": "20pt", "-webkit-text-stroke-width": "2px", "-webkit-text-stroke-color": "black"}} 
+                        style={{color: `${this.state.rating >= i ? "#ff0" : "#000"}`, "fontSize": "20pt", "WebkitTextStrokeWidth": "2px", "WebkitTextStrokeColor": "black"}} 
                         onClick={this.handleStars}
                     />
                 </label>)
             }
             return <div>
-            <label style={{"font-size": "15pt"}}>Your rating:</label>{"   "}
+            <label style={{"fontSize": "15pt"}}>Your rating:</label>{"   "}
                 {stars}
             </div>
         }
