@@ -7,9 +7,10 @@ import Cart from "./Cart";
 import GuestHome from "./GuestHome";
 import UserProfile from "./UserProfile";
 import Products from "./Products";
-import NavBar from './Navbar';
+import NavBar from "./Navbar";
 import Register from "./Register";
 import Product from "./Product";
+import Reviews from "./Reviews";
 import PastOrders from "./PastOrders";
 
 //actions
@@ -20,7 +21,7 @@ import { loginWithToken, fetchCart } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, cart } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,9 +31,12 @@ const App = () => {
   useEffect(() => {
     if (auth.id) {
       dispatch(fetchUserProfileThunk(auth.id));
-      dispatch(fetchCart());
     }
   }, [auth]);
+
+  // useEffect(() => {
+  //   dispatch(fetchCart());
+  // }, [auth]);
 
   return (
     <div>
@@ -42,9 +46,12 @@ const App = () => {
         <Route path="/" element={auth.id ? <Home /> : <GuestHome />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={auth.id ? <Home /> : <Login />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+
         {auth.id && (
           <>
-            <Route path="/cart" element={<Cart />} />
             <Route path="/users/:id" element={<UserProfile />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<Product />} />

@@ -22,6 +22,18 @@ export const allProductsThunk = () => {
   };
 };
 
+//thunks
+export const allReviews = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`api/products/reviews`);
+      dispatch(fetchReviews(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 const initialState = [];
 
 //reducers

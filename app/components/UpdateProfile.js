@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { updateUserProfileThunk } from "../reducers/updateUserProfile";
+import { updateUserProfileThunk } from "../reducers/fetchUserProfile";
 
 function UpdateProfile(props){
-console.log(props);
+// console.log(props);
     function handleSubmit(event){
         //stop the page from refreshing
         event.preventDefault();
@@ -44,16 +44,16 @@ console.log(props);
     return <div>
         <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor="name">Update name: </label>
+                <label htmlFor="name">Update name: </label>{"   "}
                 <input type="text" name="name" placeholder={props.updateUserProfile?.userProfile?.username ? props.updateUserProfile.userProfile.username : props.userProfile?.username}/>
             </div><div>
-                <label htmlFor="email">Update email: </label>
+                <label htmlFor="email">Update email: </label>{"   "}
                 <input type="text" name="email" placeholder={props.updateUserProfile?.userProfile?.email ? props.updateUserProfile.userProfile.email : props.userProfile?.email}/>
             </div><div>
-                <label htmlFor="password">Update password: </label>
+                <label htmlFor="password">Update password: </label>{"   "}
                 <input type="text" name="password"/>
             </div><div>  
-                <label htmlFor="confirm-password">Retype updated password: </label>
+                <label htmlFor="confirm-password">Retype updated password: </label>{"   "}
                 <input type="text" name="password"/>
                 {/* For security reasons the "name" prop for the password input fields 
                 should be omitted (it lets the browser do a dropdown list of previous inputs), 

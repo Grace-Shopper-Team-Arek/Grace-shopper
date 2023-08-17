@@ -12,6 +12,7 @@ Order.hasMany(LineItem);
 LineItem.belongsTo(Product);
 Product.hasMany(Review);
 User.hasMany(Review);
+Review.belongsTo(User);
 
 
 const syncAndSeed = async () => {
@@ -19,6 +20,7 @@ const syncAndSeed = async () => {
   const [
     moe,
     lucy,
+    curly,
     larry,
     foo,
     bar,
@@ -31,6 +33,7 @@ const syncAndSeed = async () => {
   ] = await Promise.all([
     User.create({ username: "moe", password: "123", email: "moe@email.com" }),
     User.create({ username: "lucy", password: "123", email: "lucy@email.com" }),
+    User.create({ username: "curly", password: "123", email: "curly@email.com", userType: "ADMIN"}),
     User.create({
       username: "larry",
       password: "123",

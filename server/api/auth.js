@@ -21,8 +21,13 @@ app.get("/", async (req, res, next) => {
 app.post("/register", async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
+<<<<<<< HEAD
     const token = newUser.generateToken();
     res.status(201).send({...newUser, token});
+=======
+    newUser.token = newUser.generateToken();
+    res.status(201).send(newUser);
+>>>>>>> main
   } catch (ex) {
     res
       .status(500)

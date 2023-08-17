@@ -8,8 +8,10 @@ import products from "./reducers/products";
 import product from "./reducers/product";
 import updateUserProfile from "./reducers/updateUserProfile";
 import pastOrders from "./reducers/fetchPastOrders";
+import reviews from "./reducers/reviews";
 
 const reducer = combineReducers({
+  reviews,
   auth,
   cart,
   userProfile,
