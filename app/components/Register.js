@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { attemptRegister } from "../store";
 
 const Register = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
     const [state, setState] = useState({
         username: "",
         email: "",
         password: "",
+        confirmPassword: ""
     });
+    
     const [error, setError] = useState("");
 
     const handleChange = (e) => {
@@ -21,8 +26,19 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (state.password !== state.confirmPassword) {
+            setError("Passwords do not match!");
+            return;
+        }
+        
         try {
-            await dispatch(attemptRegister(state));
+            await dispatch(attemptRegister({
+                username: state.username,
+                email: state.email,
+                password: state.password
+            }));
+            navigate("/")       
         } catch (err) {
             setError(err.message || "Registration failed");
         }
@@ -62,6 +78,17 @@ const Register = () => {
                         className="form-control"
                         name="password"
                         value={state.password}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Confirm Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        name="confirmPassword"
+                        value={state.confirmPassword}
                         onChange={handleChange}
                         required
                     />

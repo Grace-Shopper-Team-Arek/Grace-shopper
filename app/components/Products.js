@@ -12,7 +12,7 @@ const Products = (props) => {
   }, []); //only runs once with [] argument
 
   //Similar to using states -> want to listen to effect changes
-
+  
   return (
     <div className="container mx-auto mt-4">
       <div className="row">

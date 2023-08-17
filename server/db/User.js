@@ -105,14 +105,14 @@ User.prototype.removeFromCart = async function ({ product, quantityToRemove }) {
 
 //Get past orders
 User.prototype.getPastOrders = async function () {
-  let pastOrders = await conn.models.order.findOne({
+  const pastOrders = await conn.models.order.findOne({
     where: {
       userId: this.id,
       fulfilled: true,
     },
   });
-
-  pastOrders = await conn.models.order.findByPk(pastOrders.id, {
+ 
+  const pastOrders1 = await conn.models.order.findByPk(pastOrders.id, {
     include: [
       {
         model: conn.models.lineItem,
@@ -120,7 +120,7 @@ User.prototype.getPastOrders = async function () {
       },
     ],
   });
-  return pastOrders;
+  return pastOrders1;
 };
 
 //Archive orders
