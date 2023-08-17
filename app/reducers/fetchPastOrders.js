@@ -2,7 +2,6 @@ import axios from "axios";
 
 const FETCH_PAST_ORDERS = "FETCH_PAST_ORDERS";
 
-//action creators
 
 const fetchPastOrders = (pastOrders) => {
     return {
@@ -11,18 +10,17 @@ const fetchPastOrders = (pastOrders) => {
     };
     }
 
-//thunks
-
 export const fetchPastOrdersThunk = (id) => {
     return async (dispatch) => {
-        try {
-            const { data } = await axios.get(`/api/orders/past`);
-            dispatch(fetchPastOrders(data));
-        } catch (err) {
-            console.log(err);
-        }
-    };
-}
+        const token = window.localStorage.getItem("token");
+    const response = await axios.get("/api/orders/past", {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch({ type: "FETCH_PAST_ORDERS", pastOrders: response.data });
+  };
+};
 
 const initialState = {
     pastOrders: []

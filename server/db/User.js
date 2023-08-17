@@ -111,7 +111,7 @@ User.prototype.getPastOrders = async function () {
       fulfilled: true,
     },
   });
-  consolelog(pastOrders)
+ 
   const pastOrders1 = await conn.models.order.findByPk(pastOrders.id, {
     include: [
       {

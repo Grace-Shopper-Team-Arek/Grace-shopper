@@ -46,7 +46,6 @@ app.put("/cart", async (req, res, next) => {
 app.get("/past", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    console.log(req.headers.authorizaion)
     console.log('user', user)
     res.send(await user.getPastOrders());
   } catch (ex) {

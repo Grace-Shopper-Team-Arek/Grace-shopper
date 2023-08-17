@@ -5,6 +5,8 @@ import { fetchPastOrdersThunk } from '../reducers/fetchPastOrders';
 const PastOrders = (props) => {
     const { fetchPastOrders, pastOrders, auth } = props;
 
+    console.log(props)
+
     useEffect(() => {
         if (auth.id) {
             fetchPastOrders(auth.id);
@@ -22,17 +24,11 @@ const PastOrders = (props) => {
                         <p>You have no past orders.</p>
                     ) : (
                         <div>
-                            {Array.isArray(pastOrders) && pastOrders.map(order => (
+                            {pastOrders && pastOrders?.lineItems?.map(order => (
                                 <div key={order.id}>
+                                    <strong>Name:</strong> {order.product.name}
                                     <strong>Order ID:</strong> {order.id}
-                                    <ul>
-                                        {Array.isArray(pastOrders) && order.lineItems.map(lineItem => (
-                                            <li key={lineItem.id}>
-                                                Product: {lineItem.product.name} 
-                                                Quantity: {lineItem.quantity}
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <strong>Quantity:</strong> {order.quantity}
                                 </div>
                             ))}
                         </div>
