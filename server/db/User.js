@@ -119,7 +119,7 @@ User.prototype.getPastOrders = async function () {
       fulfilled: true,
     },
   });
- 
+
   const pastOrders1 = await conn.models.order.findByPk(pastOrders.id, {
     include: [
       {
@@ -148,6 +148,14 @@ User.prototype.archiveOrders = async function ({ product, quantity }) {
     });
   }
   return this.getPastOrders();
+};
+
+//Fulfill an order (checkout)
+User.prototype.checkout = async function () {
+  const cart = await this.getCart();
+  cart.fulfilled = true;
+  await cart.save();
+  return cart;
 };
 
 User.addHook("beforeSave", async (user) => {
