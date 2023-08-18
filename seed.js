@@ -1,3 +1,3 @@
-// const { syncAndSeed } = require("./server/db");
+const { syncAndSeed } = require("./server/db");
 
-// syncAndSeed();
+syncAndSeed();
