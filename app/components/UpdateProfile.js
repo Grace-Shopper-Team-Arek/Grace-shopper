@@ -45,7 +45,7 @@ function UpdateProfile(props){
             dataPackage.imageUrl = update.updatedAvatar;
         }
         
-        if(update.updatedAddress && update.updatedAvatar.length > 0){
+        if(update.updatedAddress && update.updatedAddress.length > 0){
             dataPackage.shippingAddress = update.updatedAddress;
         }
 
