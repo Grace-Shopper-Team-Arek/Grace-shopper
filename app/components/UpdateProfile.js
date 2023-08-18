@@ -12,8 +12,10 @@ function UpdateProfile(props){
         const update = {
             updatedName: event.target[0].value,
             updatedEmail: event.target[1].value,
-            updatedPW: event.target[2].value,
-            confirmUpdPW: event.target[3].value,
+            updatedAddress: event.target[2].value,
+            updatedAvatar: event.target[3].value,
+            updatedPW: event.target[4].value,
+            confirmUpdPW: event.target[5].value,
         }
 
         //clear the input fields
@@ -21,6 +23,8 @@ function UpdateProfile(props){
         event.target[1].value = "";
         event.target[2].value = "";
         event.target[3].value = "";
+        event.target[4].value = "";
+        event.target[5].value = "";
         
         const dataPackage = {};
 
@@ -37,7 +41,16 @@ function UpdateProfile(props){
             dataPackage.password = update.updatedPW ;
         }
 
+        if(update.updatedAvatar && update.updatedAvatar.length > 0){
+            dataPackage.imageUrl = update.updatedAvatar;
+        }
+        
+        if(update.updatedAddress && update.updatedAvatar.length > 0){
+            dataPackage.shippingAddress = update.updatedAddress;
+        }
+
         //send the update along to be implemented
+        console.log(props.userProfile.id);
         props.updateUserProfileThunk(props.userProfile.id, dataPackage);
     }
 
@@ -45,10 +58,16 @@ function UpdateProfile(props){
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="name">Update name: </label>{"   "}
-                <input type="text" name="name" placeholder={props.updateUserProfile?.userProfile?.username ? props.updateUserProfile.userProfile.username : props.userProfile?.username}/>
+                <input type="text" name="name" placeholder={props.userProfile?.username}/>
             </div><div>
                 <label htmlFor="email">Update email: </label>{"   "}
-                <input type="text" name="email" placeholder={props.updateUserProfile?.userProfile?.email ? props.updateUserProfile.userProfile.email : props.userProfile?.email}/>
+                <input type="text" name="email" placeholder={props.userProfile?.email}/>
+            </div><div>
+                <label htmlFor="address">Shipping Address: </label>{"   "}
+                <input type="text" name="address" placeholder={props.userProfile?.shippingAddress}/>
+            </div><div>
+                <label htmlFor="url">Avatar URL: </label>{"   "}
+                <input type="text" name="avatar" placeholder={props.userProfile?.imageUrl}/>
             </div><div>
                 <label htmlFor="password">Update password: </label>{"   "}
                 <input type="text" name="password"/>
@@ -68,7 +87,6 @@ function UpdateProfile(props){
 const mapStateToProps = (state) => {
     return {
         userProfile: state.userProfile,
-        updateUserProfile: state.updateUserProfile,
     };
 }
 

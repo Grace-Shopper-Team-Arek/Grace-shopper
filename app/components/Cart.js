@@ -163,6 +163,7 @@ const Cart = (props) => {
               </div>
             </div>
             <hr class="line" />
+            {props.userProfile?.shippingAddress ? <div><span>Ships to:<div><small>{props.userProfile.shippingAddress}</small></div></span><hr class="line"/></div> : ""}
             <div class="d-flex justify-content-between information">
               <span>Subtotal</span>
               <span>${totalPrice}</span>
@@ -194,6 +195,7 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    userProfile: state.userProfile,
   };
 };
 

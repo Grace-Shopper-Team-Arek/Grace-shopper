@@ -19,6 +19,14 @@ const User = conn.define("user", {
     },
     unique: true,
   },
+  shippingAddress: {
+    type: STRING,
+    allowNull: false,
+  },
+  imageUrl: {
+    type: STRING,
+    allowNull: false,
+  },
   password: {
     type: STRING,
     allowNull: false,

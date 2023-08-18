@@ -32,13 +32,15 @@ const syncAndSeed = async () => {
     mcard,
     ethyl,
   ] = await Promise.all([
-    User.create({ username: "moe", password: "123", email: "moe@email.com" }),
-    User.create({ username: "lucy", password: "123", email: "lucy@email.com" }),
-    User.create({ username: "curly", password: "123", email: "curly@email.com", userType: "ADMIN"}),
+    User.create({ username: "moe", password: "123", email: "moe@email.com", shippingAddress: "", imageUrl: "" }),
+    User.create({ username: "lucy", password: "123", email: "lucy@email.com", shippingAddress: "", imageUrl: "" }),
+    User.create({ username: "curly", password: "123", email: "curly@email.com", userType: "ADMIN", shippingAddress: "", imageUrl: ""}),
     User.create({
       username: "larry",
       password: "123",
       email: "larry@email.com",
+      shippingAddress: "", 
+      imageUrl: ""
     }),
     Product.create({ 
       name: "Base Set Holographic Charizard", 
@@ -95,6 +97,8 @@ const syncAndSeed = async () => {
       username: "ethyl",
       password: "123",
       email: "ethyl@email.com",
+      shippingAddress: "",
+      imageUrl: ""
     }),
   ]);
 

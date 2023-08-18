@@ -12,6 +12,8 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    imageUrl: "",
+    shippingAddress: "",
   });
 
   const [error, setError] = useState("");
@@ -38,6 +40,8 @@ const Register = () => {
           username: state.username,
           email: state.email,
           password: state.password,
+          imageUrl: state.imageUrl,
+          shippingAddress: state.shippingAddress
         })
       );
       await dispatch(
@@ -85,6 +89,28 @@ const Register = () => {
             value={state.email}
             onChange={handleChange}
             required
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Shipping Address</label>{"    "}<small style={{color:"#999"}}>(optional)</small>
+          <input
+            type="address"
+            className="form-control"
+            name="shippingAddress"
+            value={state.shippingAddress}
+            onChange={handleChange}
+            required={false}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Avatar URL</label>{"    "}<small style={{color:"#999"}}>(optional)</small>
+          <input
+            type="imageUrl"
+            className="form-control"
+            name="imageUrl"
+            value={state.imageUrl}
+            onChange={handleChange}
+            required={false}
           />
         </div>
         <div className="mb-3">

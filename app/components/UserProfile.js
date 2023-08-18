@@ -21,6 +21,7 @@ const UserProfile = (props) => {
           <h5 className="card-title">
             {userProfile?.username}
           </h5>
+          <img src={userProfile?.imageUrl ? userProfile.imageUrl : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} width="250px" />
           <p className="card-text">
             <strong>Email:</strong>{" "}
             {userProfile?.email}
