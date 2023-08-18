@@ -14,6 +14,19 @@ app.post("/", async (req, res, next) => {
   }
 });
 
+app.put("/", async (req, res, next) => {
+  try {
+    console.log(
+      "HERE IS REQ.HEADERS.AUTH FROM app.put/api/orders",
+      req.headers.authorization
+    );
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.checkout());
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 app.get("/cart", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -46,7 +59,7 @@ app.put("/cart", async (req, res, next) => {
 app.get("/past", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    console.log('user', user)
+    console.log("user", user);
     res.send(await user.getPastOrders());
   } catch (ex) {
     next(ex);

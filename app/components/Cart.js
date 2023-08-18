@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
-import { Link } from "react-router-dom";
-import { removeFromCart, fetchCart } from "../reducers/cart";
+import { Link, useNavigate } from "react-router-dom";
+import { removeFromCart, fetchCart, checkout } from "../reducers/cart";
 import { connect } from "react-redux";
 
 const Cart = (props) => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchCart(cart));
   }, []);
@@ -175,9 +176,11 @@ const Cart = (props) => {
               <span>Total(Incl. taxes)</span>
               <span>${totalPrice + 20}</span>
             </div>
+
             <button
               class="btn btn-primary btn-block d-flex justify-content-between mt-3"
               type="button"
+              onClick={() => props.checkout()}
             >
               <span>${totalPrice + 20}</span>
               <span>
@@ -200,6 +203,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (prod, quant) => dispatch(removeFromCart(prod, quant)),
+    checkout: () => dispatch(checkout()),
   };
 };
 

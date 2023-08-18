@@ -44,11 +44,11 @@ const Register = () => {
         attemptLogin({ username: state.username, password: state.password })
       );
       console.log(
-        "ASYNC TEST 1, testing for token:",
+        "TEST 1, testing for token:",
         window.localStorage.getItem("token")
       );
       const localCart = await JSON.parse(window.localStorage.getItem("cart"));
-      console.log("ASYNC TEST 2, testing for localCart:", localCart);
+      console.log("TEST 2, testing for localCart:", localCart);
       if (localCart) {
         localCart.lineItems.forEach((item) =>
           dispatch(addToCart(item.product, item.quantity))

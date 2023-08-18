@@ -9,6 +9,9 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "REMOVE_FROM_CART") {
     return action.cart;
   }
+  if (action.type === "CHECKOUT_CART") {
+    return action.cart;
+  }
   return state;
 };
 
@@ -71,7 +74,7 @@ export const addToCart = (product, quantity) => {
       }
     } else {
       console.log("HERE IS THE PRODUCT DETAILS, WITHIN ADD_TO_CART", product);
-      console.log("TESTING TESTING TWSTING");
+      console.log("TESTING TESTING TESTING");
       const response = await axios.post(
         `/api/orders/cart`,
         {
@@ -123,6 +126,24 @@ export const removeFromCart = (product, quantityToRemove) => {
       );
       dispatch({ type: "REMOVE_FROM_CART", cart: response.data });
     }
+  };
+};
+
+//Checkout order (put to orders endpoint)
+export const checkout = () => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    console.log("HERE IS THE TOKEN FROM CHECKOUT()", token);
+    const response = await axios.put(
+      "/api/orders",
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    dispatch({ type: "CHECKOUT_CART", cart: response.data });
   };
 };
 
